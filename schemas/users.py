@@ -26,7 +26,7 @@ class UserOut(BaseModel):
     created_at: datetime 
     
     class Config: 
-        pass 
+        pass
     
     
     
