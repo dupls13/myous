@@ -5,10 +5,10 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session 
 
-from schemas.posts import PostBase, PostCreate, PostOut 
+from schemas.posts_s import PostBase, PostCreate, PostOut 
 
 router = APIRouter(
-    prefix= 'posts', 
+    prefix= '/posts', 
     tags=['Posts']
 )
 

@@ -1,6 +1,5 @@
 from pydantic import BaseModel, EmailStr 
 from datetime import datetime 
-from users import UserOut
 
 
 class PostBase(BaseModel): 
@@ -13,7 +12,6 @@ class Post(PostBase):
     create_at: datetime
     
     owner_id: int 
-    owner: UserOut 
     
     class Config: 
         pass 

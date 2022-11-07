@@ -3,9 +3,8 @@
 
 
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
-from sqlalchemy.orm import Session 
 
-from schemas.users import UserCreate, UserLogin, UserOut
+from schemas.users_s import UserCreate, UserLogin, UserOut
 
 router = APIRouter(
     prefix='/users', 
@@ -14,7 +13,7 @@ router = APIRouter(
 
 # Get Users (admin)
 @router.get('/', response_model = UserOut)
-def get_users(id: int, db: Session = Depends(...)):
+def get_users(id: int):
     pass
     
 # Get specific user
