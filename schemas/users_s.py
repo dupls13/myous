@@ -10,10 +10,20 @@ from pydantic import BaseModel
 from datetime import datetime 
 
 
-class UserCreate(BaseModel):
+class User(BaseModel):
     email: str
+    username: str 
+    password: str 
+
+class UserCreate(BaseModel):
     username: str
     password: str
+    
+    # Needed in order to return this back to Postman
+    # Without this, it would add to database, but give "Internal Error"
+    # According to documentation, orm_mode will tell Pydantic model to return even if not a dict 
+    class Config:
+        orm_mode = True
     
 class UserLogin(BaseModel): 
     email: str
@@ -22,10 +32,10 @@ class UserLogin(BaseModel):
 class UserOut(BaseModel): 
     id: int 
     email: str
-    created_at: datetime 
+    username: str
     
-    class Config: 
-        pass
+    class Config:
+        orm_mode = True
     
     
     
