@@ -15,6 +15,6 @@ class Post(Base):
     title = Column(String, nullable = False)
     content = Column(String, nullable = False)
     
-    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable = False)
+    #user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable = False)
     
-    owner = relationship("User")
+    #owner = relationship("User")

@@ -4,9 +4,10 @@
 
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session 
+from typing import List
 
 from database import get_db
-from schemas.posts_s import PostBase, PostCreate, PostOut 
+from schemas.posts_s import Post, PostBase, PostCreate, PostOut 
 from models.posts_m import Post as modelp
 
 
@@ -16,7 +17,7 @@ router = APIRouter(
 )
 
 # Get
-@router.get('/', response_model = PostOut)
+@router.get('/', response_model = List[PostOut])
 def get_all_posts(db: Session = Depends(get_db)):
     all_posts = db.query(modelp).all()
     
@@ -29,9 +30,16 @@ def get_specific_post(post: PostOut):
 
 
 # Create 
-@router.post("/", response_model = PostCreate)
-def create_post(post: PostCreate): 
-    pass 
+@router.post("/create", response_model = PostCreate)
+def create_post(post: PostCreate, db:Session = Depends(get_db)): 
+    
+    new_post = modelp(**post.dict())
+    # Todo: match current user id to owner id to line above 
+    
+    db.add(new_post)
+    db.commit()
+    db.refresh(new_post)
+    return new_post
         
 
 # Update 
