@@ -29,7 +29,7 @@ class UserLogin(BaseModel):
     email: str
     password: str
     
-class UserOut(BaseModel): 
+class UserOut(BaseModel):
     id: int 
     email: str
     username: str

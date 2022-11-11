@@ -5,7 +5,10 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session 
 
+from database import get_db
 from schemas.posts_s import PostBase, PostCreate, PostOut 
+from models.posts_m import Post as modelp
+
 
 router = APIRouter(
     prefix= '/posts', 
@@ -14,9 +17,10 @@ router = APIRouter(
 
 # Get
 @router.get('/', response_model = PostOut)
-def get_all_posts(db):
-    posts = 1
-    return posts 
+def get_all_posts(db: Session = Depends(get_db)):
+    all_posts = db.query(modelp).all()
+    
+    return all_posts
 
 @router.get("/{id}", response_model = PostOut)
 def get_specific_post(post: PostOut):
