@@ -24,8 +24,16 @@ def get_all_posts(db: Session = Depends(get_db)):
     return all_posts
 
 @router.get("/{id}", response_model = PostOut)
-def get_specific_post(post: PostOut):
-    pass 
+def get_specific_post(id: int, db: Session = Depends(get_db)):
+    specific_post = db.query(modelp).filter(modelp.id == id).first()
+    
+    if not specific_post:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail=f"Post with id {id} does not exist"
+        )
+        
+    return specific_post
 
 
 
