@@ -11,8 +11,6 @@ from models import users_m, votes_m, posts_m
 from database import engine 
 
 #from database import connect_database
-
-
 posts_m.Base.metadata.create_all(bind=engine)
 users_m.Base.metadata.create_all(bind=engine)
 votes_m.Base.metadata.create_all(bind=engine)
@@ -25,11 +23,7 @@ app = FastAPI()
 app.include_router(users_r.router)
 app.include_router(posts_r.router)
 
-
-# Connect database 
-# connect_database()
-
-
+# test route 
 def root(): 
     return {
         "message": "Welcome to myous" 

@@ -9,7 +9,6 @@ from sqlalchemy.orm import sessionmaker
 import psycopg2
 # Used to get column name and values
 from psycopg2.extras import RealDictCursor
-
 from datetime import time 
 
 
@@ -38,7 +37,11 @@ def connect_database():
 SQLALCHEMY_DATABASE_URL = 'postgresql://<username>:<password>@<ipaddress/hostname>/<databasename>'
 """
 
+# From SQLAlchemy
+# Credentials for database collection 
+# Should be hidden
 SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:3875@localhost:5432/myous'
+  
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
