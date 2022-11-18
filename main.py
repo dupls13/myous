@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, Depends
 from fastapi.templating import Jinja2Templates
-import uvicorn 
+import uvicorn
+from passlib.context import CryptContext
 
 from sqlalchemy.orm import Session 
 from database import get_db

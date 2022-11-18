@@ -9,6 +9,7 @@ from typing import List
 from schemas.users_s import UserCreate, UserLogin, UserOut, User
 from database import get_db
 from models.users_m import User as modelu
+from utils import hash
 
 router = APIRouter(
     prefix='/users', 
@@ -41,6 +42,11 @@ def get_specific_user(username: str, db: Session = Depends(get_db)):
 # Create User
 @router.post('/create', response_model= UserCreate)
 def create_user(user: User, db: Session = Depends(get_db)):
+    
+    # Hash password 
+    hashed_password = hash(user.password)
+    user.password = hashed_password
+    
     
     # Create new user based on the model, automatically organize 
     new_user = modelu(**user.dict())
